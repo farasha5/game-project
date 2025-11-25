@@ -1,0 +1,275 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body{
+    background: rgb(1, 1, 18);
+    
+    color: aliceblue;
+}
+
+nav{
+    width: 100%;
+    
+    padding: 1rem 3%;/*1 rem for the size of the box stretch and 3% for moving the logo(idk lol)*/
+    border-bottom: 1px solid black;
+    margin-bottom: 2px;/*this creates gap between pic and navbar*/
+    backdrop-filter: blur(6px);
+    /*position: sticky alone is not enough; you must define top.
+    z-index ensures it stays above the content when scrolling.
+    The parent of the navbar should not have overflow: hidden or overflow: 
+    auto, because that can break sticky positioning.*/
+    position: fixed;
+    top: 0;
+    
+    z-index: 1000;
+    
+    background-size: cover;/*covers the pic around the webpage*/
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    
+}
+
+.logo{
+    color:yellow;
+    margin-right: auto;
+}
+
+.logo img{
+    color: yellow;
+}
+
+.links{
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+    margin-right: 30px;
+}
+
+.links li a{
+    text-decoration: none;
+    color: aliceblue;
+    font-size: 1.05rem;
+    font-weight: 500;
+    transition: 0.2s;
+}
+
+.links li a:hover{
+    text-decoration: none;
+    color: yellow;
+    text-shadow: 0 0 10px #e6ed67;
+    font-size: 1.05rem;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.btn{
+    
+    border: none;
+    border-radius: 10px solid black;
+    box-shadow: 0 0 10px #e6ed67;
+    cursor: pointer;
+    transition: 0.2s;
+    padding: 6.5px 8.5px;
+    font-weight: 600;
+    font-size: 14;
+    background-color: rgb(242, 238, 9);
+    color: rgb(0, 0, 0);
+}
+
+.btn:hover{
+    
+    border-radius: 10px solid black;
+    cursor: pointer;
+    transition: 0.2s;
+    padding:  6.5px 8.5px;
+    font-weight: 600;
+    font-size: 14px;
+    background: rgb(223, 142, 4);
+    color: rgb(1, 0, 0);
+    
+}
+
+
+.imagecontainer {
+    width: 100%;
+    height: 850px;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* hides overflow from video edges */
+}
+
+.bgvideo {
+    
+    top: 0;
+    left: 0;
+    width: 100%;
+    
+    
+    z-index: -1; /* keeps video behind the content */
+}
+
+.content{
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    text-align: center;
+    color: azure;
+    max-width: 900px;
+}
+
+h2{
+    font-size:2.5rem ;
+    margin-bottom: 1rem;
+    letter-spacing: 2px;
+    font-weight: bold;
+    
+}
+
+p{
+    font-size:1.10rem ;
+    margin-bottom: 1.5rem;
+    letter-spacing: 1px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+
+}
+/*play now button*/
+.pn{
+    position: absolute;
+    top: 73%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    text-align: center;
+    color: azure;
+    max-width: 900px;
+    background-color: #eaf108;
+    padding:20px 25px;
+    border:none;
+    color: black;
+    box-shadow: 0 0 20px #e6ed67;
+    border-radius: 25px;
+    font-size: 20px;
+}
+
+.pn:hover{
+   
+    background-color: #f5962a;
+    padding:20px 25px;
+    border:2px solid #a86001;
+    color: #000000;
+    box-shadow: 0 0 20px rgba(228, 226, 104, 0.5);
+    
+}
+
+.recom{
+    font-size:1200px ;
+    color: azure;
+    font-weight: 900;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    margin-top: 70px;
+    text-shadow: 0 0 20px rgba(240, 228, 57, 0.5);
+    margin-bottom: 30px;
+    
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive, fits item width */
+    row-gap: 40px;
+    column-gap: 20px;
+    justify-content: center; /* Centers grid items horizontally */
+    justify-items: center; /* Centers each item in its grid cell */
+}
+
+.item {
+    height: 300px;
+    width: 280px;
+    background: white;
+    border-radius: 30px;
+    position: relative;       /* needed for absolute positioning of .in-box */
+    overflow: hidden;         /* hide overflow when image shrinks */
+    cursor: pointer;
+}
+
+.item img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures image covers the box without distortion */
+    border-radius: 30px; /* Matches the container’s rounded corners */
+    transition: transform 0.35s ease;
+}
+
+/* ---------- Sliding panel (initially hidden below) ---------- */
+.in-box {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 35%; /* visible area when slid up */
+    padding: 22px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    /* make it sit out of view initially */
+    transform: translateY(100%);
+    transition: transform 0.35s ease;
+    background: rgba(255,255,255,0.95); /* slightly opaque background */
+    color: #000;
+}
+
+/* ---------- Hover state tied to parent .item ---------- */
+.item:hover .in-box {
+    transform: translateY(0); /* slide into view */
+}
+
+.item:hover img {
+    /* lift/zoom image a bit so the sliding panel appears smoothly */
+    transform: translateY(-12%);
+}
+
+/* ---------- Button inside panel ---------- */
+.in-box .yes {
+    margin-top: 8px;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 14px;
+    background: #762195;
+    color: #fff;
+    cursor: pointer;
+    transition: transform 0.15s ease;
+    
+}
+.in-box .yes:active
+{opacity: 3px;
+}
+
+.in-box .yes:hover{
+    margin-top: 8px;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 14px;
+    background: #fffeff;
+    color: #762195;
+    border: 2px solid #762195;
+    transition: 0.2s
+}
+
+.in-box p{
+    margin-bottom: 2px;
+    font-size: 10px;
+}
